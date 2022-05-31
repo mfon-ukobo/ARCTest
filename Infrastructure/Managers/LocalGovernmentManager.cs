@@ -55,7 +55,25 @@ namespace Infrastructure.Managers
 				localGovernments = localGovernments.Where(x => x.StateId == parameters.StateId.Value);
 			}
 
-			return await PagedList<LocalGovernment>.ToPagedList(localGovernments, parameters.PageNumber, parameters.PageSize);
+			return await PagedList<LocalGovernment>.ToPagedListAsync(localGovernments, parameters.PageNumber, parameters.PageSize);
+		}
+
+		public async Task<LocalGovernment> FindByIdAsync(long id)
+		{
+			var localGovernment = await _unitOfWork.LocalGovernment
+				.GetFirstAsync(x => x.Id == id);
+
+			return localGovernment;
+		}
+
+		public async Task<State> GetStateAsync(LocalGovernment localGovernment)
+		{
+			ArgumentNullException.ThrowIfNull(localGovernment);
+
+			var state = await _unitOfWork.State
+				.GetFirstAsync(x => x.Id == localGovernment.StateId);
+
+			return state;
 		}
 	}
 }

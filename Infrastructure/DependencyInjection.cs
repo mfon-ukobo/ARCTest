@@ -6,14 +6,18 @@ using System.Threading.Tasks;
 
 using Application.Database;
 using Application.Managers;
+using Application.Providers;
 using Application.Repositories;
+using Application.Services;
 
 using Domain.Entities;
 using Domain.Mapping;
 
 using Infrastructure.Database;
 using Infrastructure.Managers;
+using Infrastructure.Providers;
 using Infrastructure.Repositories;
+using Infrastructure.Services;
 
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -26,7 +30,11 @@ namespace Infrastructure
 	{
 		public static void AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
 		{
+			services.AddDatabase(configuration);
+			services.AddIdentity();
 			services.AddManagers();
+			services.AddServices();
+			services.AddProviders();
 
 			services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 			services.AddScoped<IUnitOfWork, UnitOfWork>();
@@ -35,24 +43,44 @@ namespace Infrastructure
 			{
 				options.AddMaps(typeof(StateMapper).Assembly);
 			});
-
-			services.AddDbContext<ISQLContext, SQLContext>(options =>
-			{
-				var connectionString = configuration.GetConnectionString("DatabaseConnString");
-				options.UseSqlServer(connectionString,
-					x => x.MigrationsAssembly("Infrastructure"));
-			});
-
-			services.AddIdentity<AppUser, AppRole>()
-				.AddEntityFrameworkStores<SQLContext>()
-				.AddDefaultTokenProviders();
 		}
 
 		private static void AddManagers(this IServiceCollection services)
 		{
-			services.AddScoped<IUserManager, UserManager>();
+			services.AddScoped<ICustomerManager, CustomerManager>();
 			services.AddScoped<IStateManager, StateManager>();
 			services.AddScoped<ILocalGovernmentManager, LocalGovernmentManager>();
+			services.AddScoped<IBankManager, BankManager>();
+		}
+
+		private static void AddServices(this IServiceCollection services)
+		{
+			services.AddScoped<IRegistrationService, RegistrationService>();
+		}
+
+		private static void AddDatabase(this IServiceCollection services, IConfiguration configuration)
+		{
+			services.AddDbContext<ISQLContext, SQLContext>(options =>
+			{
+				var connectionString = configuration.GetConnectionString("Default");
+				options.UseSqlServer(connectionString,
+					x => x.MigrationsAssembly("Infrastructure"));
+			});
+		}
+
+		private static void AddIdentity(this IServiceCollection services)
+		{
+			services.AddIdentity<Customer, AppRole>(options =>
+			{
+				options.SignIn.RequireConfirmedPhoneNumber = true;
+			})
+			.AddEntityFrameworkStores<SQLContext>()
+			.AddDefaultTokenProviders();
+		}
+
+		private static void AddProviders(this IServiceCollection services)
+		{
+			services.AddScoped<IPhoneNumberTokenProvider, PhoneNumberTokenProvider>();
 		}
 	}
 }

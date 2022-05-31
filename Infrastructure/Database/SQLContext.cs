@@ -13,7 +13,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Database
 {
-	internal class SQLContext : IdentityDbContext<AppUser, AppRole, Guid>, ISQLContext
+	internal class SQLContext : IdentityDbContext<Customer, AppRole, Guid>, ISQLContext
 	{
 		public SQLContext(DbContextOptions options) : base(options)
 		{

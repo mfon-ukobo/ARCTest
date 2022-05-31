@@ -1,17 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
+using Microsoft.AspNetCore.Identity;
 
 namespace Domain.Entities
 {
-
-	[Table("Customers")]
-	public class Customer : DatedEntity<long, DateTimeOffset, DateTimeOffset>
+	public class Customer : IdentityUser<Guid>
 	{
-		public Guid UserId { get; set; }
+		public Customer()
+		{
+
+		}
+
+		public Customer(string email)
+		{
+			Email = email;
+		}
+
 		public long LocalGovernmentId { get; set; }
+		public DateTimeOffset CreatedAt { get; set; }
+		public DateTimeOffset ModifiedAt { get; set; }
 	}
 }

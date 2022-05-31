@@ -1,6 +1,10 @@
 ﻿using Application.Managers;
+using Application.Services;
+
+using AutoMapper;
 
 using Domain.Dtos.Customer;
+using Domain.QueryFilters;
 
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -12,24 +16,26 @@ namespace Api.Controllers
 	public class CustomersController : ControllerBase
 	{
 		private readonly ICustomerManager _customerManager;
+		private readonly IMapper _mapper;
 
-		public CustomersController(ICustomerManager customerManager)
+		public CustomersController(ICustomerManager customerManager, IMapper mapper)
 		{
 			_customerManager = customerManager;
+			_mapper = mapper;
 		}
 
-		[HttpPost]
-		public async Task<IActionResult> Create(CreateCustomerRequest request)
+		/// <summary>
+		/// Get Paginated Customers
+		/// </summary>
+		/// <param name="parameters"></param>
+		/// <returns></returns>
+		/// <response code="200">A paginated list of Customers</response>
+		[HttpGet]
+		public async Task<IActionResult> Get([FromQuery] CustomerFilterParameters parameters)
 		{
-			var createUserResult = await _customerManager
-				.CreateAsync(request.Email, request.PhoneNumber, request.LocalGovernmentId, request.Password);
+			var customers = await _customerManager.GetAsync(parameters);
 
-			if (!createUserResult.Succeeded)
-			{
-				return BadRequest(createUserResult.Errors);
-			}
-
-			return Ok();
+			return Ok(_mapper.Map<IEnumerable<GetCustomersResponse>>(customers));
 		}
 	}
 }

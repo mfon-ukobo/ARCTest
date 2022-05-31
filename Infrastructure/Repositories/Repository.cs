@@ -59,5 +59,11 @@ namespace Infrastructure.Repositories
 
 			return data;
 		}
+
+		public async Task<TEntity> GetFirstAsync(Expression<Func<TEntity, bool>> expression)
+		{
+			var entity = await _dbSet.FirstOrDefaultAsync(expression);
+			return entity;
+		}
 	}
 }

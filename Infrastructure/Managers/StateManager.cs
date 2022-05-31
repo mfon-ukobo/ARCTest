@@ -48,7 +48,7 @@ namespace Infrastructure.Managers
 
 		public async Task<PagedList<State>> GetAsync(StateFilterParameters parameters)
 		{
-			return await PagedList<State>.ToPagedList(States, parameters.PageNumber, parameters.PageSize);
+			return await PagedList<State>.ToPagedListAsync(States, parameters.PageNumber, parameters.PageSize);
 		}
 	}
 }

@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 
 namespace Domain.Dtos.Customer
 {
-	public class CreateCustomerRequest
+	public class RegisterCustomerRequest
 	{
 		public string Email { get; set; }
 		public string PhoneNumber { get; set; }
 		public string Password { get; set; }
+		public long StateId { get; set; }
 		public long LocalGovernmentId { get; set; }
 	}
 }

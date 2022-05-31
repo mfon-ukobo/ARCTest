@@ -24,6 +24,12 @@ namespace Api.Controllers
 			_mapper = mapper;
 		}
 
+		/// <summary>
+		/// Create a State
+		/// </summary>
+		/// <param name="request"></param>
+		/// <returns></returns>
+		/// <response code="200">The newly created State</response>
 		[HttpPost]
 		public async Task<IActionResult> Create(CreateStateRequest request)
 		{
@@ -39,6 +45,12 @@ namespace Api.Controllers
 			return Ok(_mapper.Map<CreateStateResponse>(state));
 		}
 
+		/// <summary>
+		/// Get Paginated States
+		/// </summary>
+		/// <param name="parameters"></param>
+		/// <returns></returns>
+		/// <response code="200">A paginated list of States</response>
 		[HttpGet]
 		public async Task<IActionResult> Get([FromQuery] StateFilterParameters parameters)
 		{

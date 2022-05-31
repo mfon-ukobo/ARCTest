@@ -24,6 +24,12 @@ namespace Api.Controllers
 			_mapper = mapper;
 		}
 
+		/// <summary>
+		/// Create Local Government
+		/// </summary>
+		/// <param name="request"></param>
+		/// <returns></returns>
+		/// <response code="200">The newly created Local Government</response>
 		[HttpPost]
 		public async Task<IActionResult> Create(CreateLocalGovernmentRequest request)
 		{
@@ -39,6 +45,12 @@ namespace Api.Controllers
 			return Ok(_mapper.Map<CreateLocalGovernmentResponse>(localGovernment));
 		}
 
+		/// <summary>
+		/// Get Paginated Local Governments
+		/// </summary>
+		/// <param name="parameters"></param>
+		/// <returns></returns>
+		/// <response code="200">A paginated list of Local Governments</response>
 		[HttpGet]
 		public async Task<IActionResult> Get([FromQuery] LocalGovernmentFilterParameters parameters)
 		{

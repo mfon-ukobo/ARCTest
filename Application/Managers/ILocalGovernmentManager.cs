@@ -14,6 +14,8 @@ namespace Application.Managers
 	public interface ILocalGovernmentManager
 	{
 		Task<ManagerResult> CreateAsync(LocalGovernment localGovernment);
+		Task<LocalGovernment> FindByIdAsync(long id);
 		Task<PagedList<LocalGovernment>> GetAsync(LocalGovernmentFilterParameters parameters);
+		Task<State> GetStateAsync(LocalGovernment localGovernment);
 	}
 }
