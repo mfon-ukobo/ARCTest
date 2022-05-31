@@ -99,9 +99,9 @@ namespace Api.Tests.UnitTesting
 			// Assert
 			Assert.IsType<BadRequestObjectResult>(actionResult);
 
-			var responseModel = badRequestresult?.Value as string[];
+			var responseModel = badRequestresult?.Value as List<string>;
 			Assert.NotNull(responseModel);
-			Assert.IsType<string[]>(responseModel);
+			Assert.IsType<List<string>>(responseModel);
 		}
 
 		[Fact]
@@ -127,6 +127,8 @@ namespace Api.Tests.UnitTesting
 
 
 			// Assert
+			Assert.NotNull(actionResult);
+
 			mockRegistrationService.Verify(x => x.RegisterCustomer(customer.Email,
 					customer.PhoneNumber,
 					customer.Password,
@@ -134,11 +136,11 @@ namespace Api.Tests.UnitTesting
 					customer.LocalGovernmentId));
 
 			var badRequestresult = actionResult as BadRequestObjectResult;
-			Assert.IsType<BadRequestObjectResult>(actionResult);
+			Assert.NotNull(badRequestresult);
 
-			var responseModel = badRequestresult?.Value as string[];
+			var responseModel = badRequestresult?.Value as List<string>;
 			Assert.NotNull(responseModel);
-			Assert.IsType<string[]>(responseModel);
+			Assert.IsType<List<string>>(responseModel);
 		}
 
 		private void Setup()
