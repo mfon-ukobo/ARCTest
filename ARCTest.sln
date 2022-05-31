@@ -15,11 +15,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure", "Infrastru
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{CE14048A-F942-4E87-BEFC-CEE93BBD05B8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api.Tests", "Infrastructure.Tests\Api.Tests.csproj", "{7ADF4961-5D0F-45F4-8257-7091A94CCAB8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Api.Tests", "Api.Tests\Api.Tests.csproj", "{7ADF4961-5D0F-45F4-8257-7091A94CCAB8}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "thirdparty", "thirdparty", "{276DAFA1-3CD8-4A0C-A86A-3E1AB349A6FB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WemaClient", "WemaClient\WemaClient.csproj", "{88CC26AE-36F3-4081-A1D0-A4B3918E5946}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WemaClient", "WemaClient\WemaClient.csproj", "{88CC26AE-36F3-4081-A1D0-A4B3918E5946}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure.Tests", "Infrastructure.Tests\Infrastructure.Tests.csproj", "{F70EB16C-68DE-4A5A-B3E5-70B6BA43D359}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,10 @@ Global
 		{88CC26AE-36F3-4081-A1D0-A4B3918E5946}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{88CC26AE-36F3-4081-A1D0-A4B3918E5946}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{88CC26AE-36F3-4081-A1D0-A4B3918E5946}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F70EB16C-68DE-4A5A-B3E5-70B6BA43D359}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F70EB16C-68DE-4A5A-B3E5-70B6BA43D359}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F70EB16C-68DE-4A5A-B3E5-70B6BA43D359}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F70EB16C-68DE-4A5A-B3E5-70B6BA43D359}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -62,6 +68,7 @@ Global
 		{9D01F48C-C6E6-4FF2-87BB-4862F07E745D} = {42F81A98-C1A5-4F05-9C4D-736EFBCF1B35}
 		{7ADF4961-5D0F-45F4-8257-7091A94CCAB8} = {CE14048A-F942-4E87-BEFC-CEE93BBD05B8}
 		{88CC26AE-36F3-4081-A1D0-A4B3918E5946} = {276DAFA1-3CD8-4A0C-A86A-3E1AB349A6FB}
+		{F70EB16C-68DE-4A5A-B3E5-70B6BA43D359} = {CE14048A-F942-4E87-BEFC-CEE93BBD05B8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6DDC3452-293E-401C-AD5D-0006D2083155}
